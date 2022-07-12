@@ -1,19 +1,16 @@
+const path = require('path');
+
 const express = require('express');
+
+const rootDir = require('../util/path');
+const adminData = require('./admin');
 const router = express.Router();
 
-
-router.get('/shop',(req,res,next)=>{
-    console.log('Shop is here');
-    res.send(
-        '<h2>Add a shop by filling the form below</h2>'
-    );
+router.get('/', (req, res, next) => {
+  // console.log(adminData.products);
+  // res.sendFile(path.join(rootDir, 'views', 'shop.html'));
+  const products = adminData.products;
+  res.render('shop',{prods:products , docTitle:'Shop'});
 });
-
-router.post('/products',(req,res,next)=>{
-    console.log("Products post shop page", req.body);
-    res.redirect('/shop');
-});
-
-
 
 module.exports = router;
